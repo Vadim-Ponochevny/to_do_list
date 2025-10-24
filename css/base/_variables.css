@@ -1,0 +1,14 @@
+:root {
+  --color-primary: #8A53FF;
+  --color-text: #434343;
+  --color-nav: #495367;
+
+  --font-base: 'Roboto', sans-serif;
+  --font-heading: 'Changa One', sans-serif;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 15px; 
+}
