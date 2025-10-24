@@ -1,0 +1,98 @@
+/* Кнопка для добавления */
+.button_add {
+  height: 70px;
+  width: 70px;
+  background-color: var(--color-black);
+  color: var(--color-bright-orange);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 40px;
+  padding: 10px 10px;
+  margin: 0;
+  border: 2px solid var(--color-bright-orange);
+  cursor: pointer;
+}
+
+.button_add:hover {
+  background-color: var(--color-grey);
+}
+
+/* Кнопки поделиться, инфо и редактировать */
+.button_task_share,
+.button_task_info,
+.button_task_edit {
+  background-color: var(--color-grey);
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: 36px;
+  align-items: top;
+  font-size: 40px;
+  margin: 0;
+  border: 1px solid var(--color-bright-orange);
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--color-white);
+  font-weight: 700;
+  font-style: bold;
+  font-family: Roboto, sans-serif;
+}
+.button_task_share:active,
+.button_task_info:active,
+.button_task_edit:active {
+  background-color: var(--color-grey);
+}
+.button_task_share img,
+.button_task_info img,
+.button_task_edit img {
+  width: 60%;
+  height: 60%;
+}
+
+/* Кнопка действия в окне */
+.button_window_action {
+  background-color: var(--color-black);
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  height: 26px;
+  width: 64px;
+  align-items: top;
+  font-size: 40px;
+  margin: 0;
+  border: 1px solid var(--color-bright-orange);
+  cursor: pointer;
+  font-size: 10px;
+  color: var(--color-white);
+  font-weight: 400;
+  font-family: Roboto, sans-serif;
+}
+.button_window_action:hover {
+  border-color: var(--color-orange);
+  background-color: var(--color-grey);
+}
+
+/* Кнопка Удалить */
+.button_dell {
+  background-color: var(--color-black);
+  color: var(--color-bright-orange);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  margin: 0; 
+  border: 1px solid var(--color-bright-orange);
+  cursor: pointer;
+}
+.button_dell img {
+  width: 50%;
+  height: 50%;
+}
+.button_add:hover {
+  background-color: var(--color-grey);
+}
