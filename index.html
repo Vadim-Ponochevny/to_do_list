@@ -2,100 +2,63 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="css/style.css" />
     <title>To-Do</title>
   </head>
   <body>
-    <main class="main">
+    <div class="app">
+      <main class="main">
+          <section>
+              <h2>Кнопка добавления</h2>
+              <button class="button__add">
+                  <img src="./assets/plus.svg" alt="Поделиться" />
+              </button>
+          </section>
+
         <section>
-            <h2>Кнопка добавления</h2>
-            <button class="button_add">
-                <img src="./assets/plus.svg" alt="Поделиться" />
-            </button>
+          <h2>Кнопки задачи</h2>
+          <div class="button-group">
+              <button class="button__task__share">
+                  <img src="./assets/share.svg" alt="Поделиться" />
+              </button>
+              <button class="button__task__info">
+                  i
+              </button>
+              <button class="button__task__edit">
+                  <img src="./assets/edit.svg" alt="Редактировать" />
+              </button>
+          </div>
         </section>
 
-      <section>
-        <h2>Кнопки задачи</h2>
-        <div class="button-group">
-            <button class="button_task_share">
-                <img src="./assets/share.svg" alt="Поделиться" />
-            </button>
-            <button class="button_task_info">
-                i
-            </button>
-            <button class="button_task_edit">
-                <img src="./assets/edit.svg" alt="Редактировать" />
-            </button>
-        </div>
-      </section>
+        <section>
+          <h2>Кнопка удалить</h2>
+          <button class="button__dell">
+              <img src="./assets/cross.svg" />
+          </button>
+        </section>
 
-      <section>
-        <h2>Кнопка удалить</h2>
-        <button class="button_dell">
-            <img src="./assets/cross.svg" />
-        </button>
-      </section>
+        <section>
+          <h2>Кнопка экшн</h2>
+          <button class="button__window__action">
+              Да
+          </button>
+        </section>
 
-      <section>
-        <h2>Кнопка экшн</h2>
-        <button class="button_window_action">
-            Да
-        </button>
-      </section>
+        <!--  1. Поля ввода (input) -->
+        <section>
+          <h2 >Поля ввода</h2>
+          <input type="text" placeholder="Input" />
+        </section>
 
-      <!--  1. Поля ввода (input) -->
-    <section>
-      <h2 style="color:#ff8303;">Поля ввода</h2>
-      <input type="text" placeholder="Введите название задачи" />
-      <br /><br />
-      <input type="text" placeholder="Введите описание задачи" />
-    </section>
+       <!--  6. Окно "Нет задач" -->
+        <section class="no__task__window">
+          <div></div>
+          <p>Нет задач</p>
+          <div></div>
+        </section>
 
-    <!--  2. Окно редактирования -->
-    <section class="edit_window">
-      <p>Окно редактирования</p>
-      <input type="text" placeholder="Название задачи" />
-      <textarea placeholder="Описание задачи"></textarea>
-      <button class="button_window_action">Сохранить</button>
-    </section>
-
-    <!--  3. Диалоговое окно -->
-    <section class="dialog_window">
-      <p>Удалить задачу?</p>
-      <div style="display: flex; justify-content: center; gap: 15px;">
-        <button class="button_window_action">Да</button>
-        <button class="button_window_action">Нет</button>
-      </div>
-    </section>
-
-    <!--  4. Окно задачи -->
-    <section class="task_window">
-      <div style="flex: 1; text-align:left;">
-        <h3>Название задачи</h3>
-        <p>Описание задачи. Например: купить молоко и хлеб.</p>
-      </div>
-      <div style="display:flex; gap:10px;">
-        <button class="button_task_edit">✏️</button>
-        <button class="button_task_share">📤</button>
-        <button class="button_dell">🗑️</button>
-      </div>
-    </section>
-
-    <!--  5. Окно "Поделиться" -->
-    <section class="share_window">
-      <button class="button_task_share">VK</button>
-      <button class="button_task_share">TG</button>
-      <button class="button_task_share">WA</button>
-      <button class="button_task_share">FB</button>
-    </section>
-
-    <!--  6. Окно "Нет задач" -->
-    <section class="no_task_window">
-      <div></div>
-      <p>Нет задач</p>
-      <div></div>
-    </section>
-      
-    </main>
+      </main>
+    </div>
   </body>
 </html>

@@ -1,115 +1,152 @@
-input,
-.edit_window input {
+.app {
   background-color: #1b1a17;
-  color: #f0e3ca;
-  border-radius: 5px;
-  height: 40px;
-  width: 1700px;
-  text-align: left;
-  padding: 0px 10px;
-  font-size: 16px;
-  margin: 0;
-  border: 2px solid #ff8303;
-  cursor: pointer;
-  opacity: 50%;
-}
-input:focus {
-  opacity: 100%;
-  outline: none;
+  display: flex;
+  flex-direction: column; 
+  padding: 20px;
+  height: 100vh;
+  width: 100vw; 
+  box-sizing: border-box; 
 }
 
-.edit_window,
-.dialog_window,
-.share_window,
-.task_window {
-  display: flex;
-  flex-direction: column;
-  background-color: #1b1a17;
-  color: #ff8303;
-  border-radius: 5px;
-  height: 450px;
-  width: 1800px;
-  text-align: center;
-  font-size: 40px;
-  padding: 15px 15px;
-  border: 2px solid #ff8303;
-  gap: 15px;
-}
-.edit_window input {
-  width: 100%;
-}
-.edit_window {
-  position: fixed;
-  top: 50%;
-}
+input,
+.edit__window input,
 textarea {
-  background-color: #1b1a17;
-  color: #f0e3ca;
+  background-color: var(--color-black);
+  color: var(--color-white);
   border-radius: 5px;
-  height: 80%;
+  border: 2px solid var(--color-orange);
   width: 100%;
-  text-align: left;
-  padding: 10px 10px;
-  font-size: 16px;
+  font-size: 14px;
+  padding: 8px 10px;
   margin: 0;
-  border: 2px solid #ff8303;
-  cursor: pointer;
-  opacity: 50%;
+  cursor: text;
+  transition: 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  background-color: var(--color-grey);
+  border-color: var(--color-bright-orange);
+  outline: none;
+  opacity: 1;
+}
+
+
+/* Отдельно для textarea */
+textarea {
+  height: 80%;
+  opacity: 0.6;
+  resize: none;
+  font-family: Roboto, sans-serif;
 }
 textarea:focus {
-  opacity: 100%;
+  opacity: 1;
 }
 
-.dialog_window {
-  display: none;
+/*  Общий стиль для окон */
+.edit__window,
+.dialog__window,
+.share__window,
+.task__window {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-black);
+  border-radius: 8px;
+  padding: 15px;
+  gap: 15px;
+  box-sizing: border-box;
+  color: var(--color-white);
+}
+
+/* Окно редактирования */
+.edit__window {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0; 
+  left: 0;
+  width: 90%;
+  height: 50%; 
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+.edit__window__buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Диалоговое окно (удалить / подтвердить) */
+.dialog__window {
   position: fixed;
   top: 40%;
-  height: 250px;
-  width: 500px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 150px;
   justify-content: space-between;
-  padding: 30px 30px;
-  color: #f0e3ca;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
+  color: var(--color-white);
 }
-.dialog_window p {
-  margin: auto;
-}
-.task_window {
-  padding: 15px 30px;
-  height: 140px;
-  justify-content: space-between;
-  width: 1800px;
-  flex-direction: row;
-  gap: 15px;
+.dialog__window p {
+  margin: 0 auto;
 }
 
-.share_window {
-  display: none;
+/* Карточка задачи */
+.task__window {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid var(--color-bright-orange);
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.task__window h3 {
+  font-size: 22px;
+  font-style: medium;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Окно “Поделиться” */
+.share__window {
   position: fixed;
-  top: 90%;
-  height: 100px;
-  width: 500px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 80px;
+  width: 360px;
   justify-content: space-between;
   flex-direction: row;
-  border: 0px solid #f0e3ca;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.no_task_window {
+/* Окно “Нет задач” */
+.no__task__window {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px 30px;
   height: 200px;
-  width: 500px;
-  justify-content: space-between;
+  width: 100%;
   text-align: center;
-  flex-direction: column;
-  border: 0px solid #f0e3ca;
 }
-.no_task_window div {
-  margin: 0 auto;
+.no__task__window div {
   height: 10px;
   width: 50%;
-  background-color: #ff8303;
+  background-color: var(--color-bright-orange);
   border-radius: 5px;
 }
-.no_task_window p {
-  font-size: 32px;
+.no__task__window p {
+  font-size: 24px;
+  color: var(--color-white);
 }

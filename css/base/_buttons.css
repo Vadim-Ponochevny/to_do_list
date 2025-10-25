@@ -1,26 +1,26 @@
 /* Кнопка для добавления */
-.button_add {
+.button__add {
   height: 70px;
   width: 70px;
   background-color: var(--color-black);
-  color: var(--color-bright-orange);
+  color: var(--color-orange);
   border-radius: 10px;
   text-align: center;
   font-size: 40px;
   padding: 10px 10px;
   margin: 0;
-  border: 2px solid var(--color-bright-orange);
+  border: 1.5px solid var(--color-bright-orange);
   cursor: pointer;
 }
 
-.button_add:hover {
+.button__add:hover {
   background-color: var(--color-grey);
 }
 
 /* Кнопки поделиться, инфо и редактировать */
-.button_task_share,
-.button_task_info,
-.button_task_edit {
+.button__task__share,
+.button__task__info,
+.button__task__edit {
   background-color: var(--color-grey);
   display: flex;
   border-radius: 5px;
@@ -31,7 +31,7 @@
   align-items: top;
   font-size: 40px;
   margin: 0;
-  border: 1px solid var(--color-bright-orange);
+  border: 1.5px solid var(--color-bright-orange);
   cursor: pointer;
   font-size: 16px;
   color: var(--color-white);
@@ -39,20 +39,20 @@
   font-style: bold;
   font-family: Roboto, sans-serif;
 }
-.button_task_share:active,
-.button_task_info:active,
-.button_task_edit:active {
+.button__task__share:active,
+.button__task__info:active,
+.button__task__edit:active {
   background-color: var(--color-grey);
 }
-.button_task_share img,
-.button_task_info img,
-.button_task_edit img {
+.button__task__share img,
+.button__task__info img,
+.button__task__edit img {
   width: 60%;
   height: 60%;
 }
 
 /* Кнопка действия в окне */
-.button_window_action {
+.button__window__action {
   background-color: var(--color-black);
   display: flex;
   border-radius: 5px;
@@ -70,13 +70,13 @@
   font-weight: 400;
   font-family: Roboto, sans-serif;
 }
-.button_window_action:hover {
+.button__window__action:hover {
   border-color: var(--color-orange);
   background-color: var(--color-grey);
 }
 
 /* Кнопка Удалить */
-.button_dell {
+.button__dell {
   background-color: var(--color-black);
   color: var(--color-bright-orange);
   border-radius: 5px;
@@ -89,10 +89,34 @@
   border: 1px solid var(--color-bright-orange);
   cursor: pointer;
 }
-.button_dell img {
+.button__dell img {
   width: 50%;
   height: 50%;
 }
-.button_add:hover {
+.button__dell:hover {
+  border-color: var(--color-orange);
   background-color: var(--color-grey);
+}
+
+/* Кнопки Поделиться */
+.button__share {
+  background-color: var(--color-back);
+  border: 2px solid var(--color-bright-orange);
+  border-radius: 50%; 
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button__share img {
+  width: 60%;
+  height: 60%;
+}
+
+.button__share:hover {
+  background-color: var(--color-grey);
+  transform: scale(1.05); 
 }
