@@ -7,58 +7,28 @@
     <title>To-Do</title>
   </head>
   <body>
-    <div class="app">
+    <div class="app" data-js-todo>
       <main class="main">
-          <section>
-              <h2>Кнопка добавления</h2>
-              <button class="button__add">
-                  <img src="./assets/plus.svg" alt="Поделиться" />
+            <section class="create__new__task__box">
+              <div class="inputs__new__tasks">
+                <input type="text" class="input__1" data-js-todo-new-task-title-input placeholder="Title..." />
+                <input type="text" class="input__1" data-js-todo-new-task-about-input placeholder="About..." />
+              </div>
+
+              <button class="button__add" data-js-todo-add-button> 
+                <img src="./assets/plus.svg" alt="Поделиться" />
               </button>
-          </section>
+            </section>
 
-        <section>
-          <h2>Кнопки задачи</h2>
-          <div class="button-group">
-              <button class="button__task__share">
-                  <img src="./assets/share.svg" alt="Поделиться" />
-              </button>
-              <button class="button__task__info">
-                  i
-              </button>
-              <button class="button__task__edit">
-                  <img src="./assets/edit.svg" alt="Редактировать" />
-              </button>
-          </div>
-        </section>
+            <ul class="todo__list" data-js-todo-list> 
+     
+            </ul>
 
-        <section>
-          <h2>Кнопка удалить</h2>
-          <button class="button__dell">
-              <img src="./assets/cross.svg" />
-          </button>
-        </section>
-
-        <section>
-          <h2>Кнопка экшн</h2>
-          <button class="button__window__action">
-              Да
-          </button>
-        </section>
-
-        <!--  1. Поля ввода (input) -->
-        <section>
-          <h2 >Поля ввода</h2>
-          <input type="text" placeholder="Input" />
-        </section>
-
-       <!--  6. Окно "Нет задач" -->
-        <section class="no__task__window">
-          <div></div>
-          <p>Нет задач</p>
-          <div></div>
-        </section>
-
+            <section class="no__task__window" data-js-no-tasks-message>
+  
+            </section>
       </main>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
