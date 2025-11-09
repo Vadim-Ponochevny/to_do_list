@@ -1,9 +1,12 @@
-.app {
+body {
   background-color: #1b1a17;
+}
+.app {
+  /* background-color: #1b1a17; */
   display: flex;
   flex-direction: column; 
   padding: 30px;
-  /* height: 100vh; */
+  min-height: 100vh;
   width: 100vw; 
   box-sizing: border-box; 
 }
