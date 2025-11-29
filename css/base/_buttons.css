@@ -21,7 +21,7 @@
 .button__task__share,
 .button__task__info,
 .button__task__edit {
-  background-color: var(--color-grey);
+  background-color: var(--color-black);
   display: flex;
   border-radius: 5px;
   justify-content: center;
@@ -51,6 +51,12 @@
   height: 60%;
 }
 
+.button__task__share:hover,
+.button__task__info:hover,
+.button__task__edit:hover {
+  background-color: var(--color-grey);
+}
+
 /* Кнопка действия в окне */
 .button__window__action {
   background-color: var(--color-black);
@@ -76,7 +82,7 @@
 }
 
 /* Кнопка Удалить */
-.button__dell {
+.task__window__button__dell {
   background-color: var(--color-black);
   color: var(--color-bright-orange);
   border-radius: 5px;
@@ -89,11 +95,11 @@
   border: 1px solid var(--color-bright-orange);
   cursor: pointer;
 }
-.button__dell img {
+.task__window__button__dell img {
   width: 50%;
   height: 50%;
 }
-.button__dell:hover {
+.task__window__button__dell:hover {
   border-color: var(--color-orange);
   background-color: var(--color-grey);
 }

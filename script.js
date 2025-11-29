@@ -10,7 +10,14 @@ class ToDo {
         itemDeleteButton: '[data-js-todo-item-delete-button]', 
         deleteDialog: '[data-js-todo-delete-dialog]',
         deleteDialogConfirmButton: '[data-js-todo-delete-dialog-confirm-button]',
-        deleteDialogCancelButton: '[data-js-todo-delete-dialog-cancel-button]'
+        deleteDialogCancelButton: '[data-js-todo-delete-dialog-cancel-button]',
+        editDialog: '[data-js-edit-dialog]',
+        editTitleInput: '[data-js-edit-title-input]',
+        editAboutTextarea: '[data-js-edit-about-textarea]',
+        editCancelButton: '[data-js-edit-cancel-button]',
+        editSaveButton: '[data-js-edit-save-button]',
+        shareDialog: '[data-js-share-dialog]',
+        shareButton: '[data-js-share-button]'
     }
 
     localStorageKey = 'todo-items'
@@ -74,26 +81,24 @@ class ToDo {
         this.listElement.innerHTML = items.map(( {id, title, about} ) => `
             <li data-js-todo-item="${id}">
                 <div class="task__window"> 
-                    <div "style="flex: 1; text-align:left;">
+                    <div class="task__window__text" ">
                         <h3>${title}</h3>
                         <p>${about}</p>
                     </div>
-                    <button class="button__dell" data-task-id=${id} data-js-todo-item-delete-button>
+                    <button class="task__window__button__dell" data-task-id=${id} data-js-todo-item-delete-button>
                         <img src="./assets/cross.svg" />
                     </button>
                 </div>
-                <div class="task__buttons" style="display: none; width: 100%; margin-top: 10px;">
-                    <div class="button-group" style="display: flex; justify-content: center; gap: 10px;">
-                        <button class="button__task__share">
-                            <img src="./assets/share.svg" alt="Поделиться" />
-                        </button>
-                        <button class="button__task__info">
-                            i
-                        </button>
-                        <button class="button__task__edit">
-                            <img src="./assets/edit.svg" alt="Редактировать" />
-                        </button>
-                    </div>
+                <div class="task__buttons" >
+                    <button class="button__task__share" data-task-id="${id}" data-js-share-button>
+                        <img src="./assets/share.svg" alt="Поделиться" />
+                    </button>
+                    <button class="button__task__info">
+                        i
+                    </button>
+                    <button class="button__task__edit" data-task-id=${id}>
+                        <img src="./assets/edit.svg" alt="Редактировать" />
+                    </button>
                 </div>
             </li>
         `).join('')
@@ -183,7 +188,6 @@ class ToDo {
     }
 
     handleTaskClick = (event) => {
-        // Обработка кнопки удаления
         const deleteButton = event.target.closest(this.selectors.itemDeleteButton);
         if (deleteButton) {
             const taskId = deleteButton.getAttribute('data-task-id');
@@ -193,11 +197,28 @@ class ToDo {
             }
         }
         
-        // Обработка клика по самой задаче
+        const editButton = event.target.closest('.button__task__edit');
+        if (editButton) {
+            const taskId = editButton.getAttribute('data-task-id');
+            if (taskId) {
+                this.showEditWindow(taskId);
+                return;
+            }
+        }
+
+        const shareButton = event.target.closest('.button__task__share');
+        if (shareButton) {
+            const taskId = shareButton.getAttribute('data-task-id');
+            if (taskId) {
+                this.showShareWindow(taskId);
+                return;
+            }
+        }
+        
         const taskElement = event.target.closest(this.selectors.item);
         if (!taskElement) return;
-        
-        if (event.target.closest('.button-group')) {
+
+        if (event.target.closest('.task__buttons')) {
             return;
         }
         
@@ -206,12 +227,11 @@ class ToDo {
         
         document.querySelectorAll('.task__buttons').forEach(buttons => {
             if (buttons !== buttonsSection) {
-                buttons.style.display = 'none';
+                buttons.classList.remove('show');
             }
         });
         
-        const isVisible = buttonsSection.style.display === 'block';
-        buttonsSection.style.display = isVisible ? 'none' : 'block';
+        buttonsSection.classList.toggle('show');
     }
 
     bindEvents() {
@@ -238,6 +258,127 @@ class ToDo {
         })
 
         this.listElement.addEventListener('click', this.handleTaskClick);
+    }
+
+    showEditWindow(taskId) {
+
+        const task = this.state.items.find(item => item.id === taskId);
+        if (!task) return;
+
+        const editHTML = `
+            <div class="edit__overlay" data-js-edit-dialog>
+                <section class="edit__window">
+                    <p>Окно редактирования</p>
+                    <input type="text" placeholder="Название задачи" value="${this.escapeHtml(task.title)}" data-js-edit-title-input />
+                    <textarea placeholder="Описание задачи" data-js-edit-about-textarea>${this.escapeHtml(task.about)}</textarea>
+                    <div class="edit__window__buttons">
+                        <button class="button__window__action" data-js-edit-cancel-button>Отмена</button>
+                        <button class="button__window__action" data-js-edit-save-button data-task-id="${taskId}">Сохранить</button>
+                    </div>
+                </section>
+            </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', editHTML);
+        
+        const editDialog = document.querySelector(this.selectors.editDialog);
+        const titleInput = editDialog.querySelector(this.selectors.editTitleInput);
+        const aboutTextarea = editDialog.querySelector(this.selectors.editAboutTextarea);
+        const cancelButton = editDialog.querySelector(this.selectors.editCancelButton);
+        const saveButton = editDialog.querySelector(this.selectors.editSaveButton);
+        
+        titleInput.focus();
+        
+        const cancelHandler = () => {
+            editDialog.remove();
+        };
+
+        const saveHandler = () => {
+            const newTitle = titleInput.value.trim();
+            const newAbout = aboutTextarea.value.trim();
+            
+            if (newTitle.length > 0 && newAbout.length > 0) {
+                this.updateItem(taskId, newTitle, newAbout);
+                editDialog.remove();
+            } else {
+                alert('Пожалуйста, заполните оба поля!');
+            }
+        };
+
+        const handleKeypress = (event) => {
+            if (event.key === 'Enter') {
+                saveHandler();
+            }
+        };
+
+        cancelButton.addEventListener('click', cancelHandler);
+        saveButton.addEventListener('click', saveHandler);
+        titleInput.addEventListener('keypress', handleKeypress);
+        aboutTextarea.addEventListener('keypress', handleKeypress);
+        
+        editDialog.addEventListener('click', (event) => {
+            if (event.target === editDialog) {
+                cancelHandler();
+            }
+        });
+    }
+
+    showShareWindow(taskId) {
+        const task = this.state.items.find(item => item.id === taskId);
+        if (!task) return this.showError('Задача не найдена для обмена.');
+        
+        const shareDialogHTML = `
+        <div class="share__overlay" data-js-share-dialog>
+            <section class="share__window">
+                <button class="button__share">
+                    <img src="./assets/copy.svg" alt="Копировать" />
+                </button>
+                <button class="button__share">
+                    <img src="./assets/vk.svg" alt="VK" />
+                </button>
+                <button class="button__share">
+                    <img src="./assets/telegram.svg" alt="Telegram" />
+                </button>
+                <button class="button__share">
+                    <img src="./assets/whatsapp.svg" alt="WhatsApp" />
+                </button>
+                <button class="button__share">
+                    <img src="./assets/facebook.svg" alt="Facebook" />
+                </button>
+            </section>
+        </div>
+        `;
+            
+        document.body.insertAdjacentHTML('beforeend', shareDialogHTML);
+
+        const shareDialog = document.querySelector(this.selectors.shareDialog);
+        if (!shareDialog) return;
+
+        const closeHandler = (event) => {
+            if (event.target === shareDialog) {
+                shareDialog.remove();
+            }
+        };
+
+        shareDialog.addEventListener('click', closeHandler);
+        
+    }
+
+    escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    updateItem(id, newTitle, newAbout) {
+        this.state.items = this.state.items.map(item => 
+            item.id === id ? { ...item, title: newTitle, about: newAbout } : item
+        );
+        this.saveItemsToLocalStorage();
+        this.render();
     }
 }
 
