@@ -22,6 +22,10 @@ class ToDo {
 
     localStorageKey = 'todo-items'
 
+    currentDeleteDialog = null
+    currentEditDialog = null
+    currentShareDialog = null
+
     elements = {}
 
     constructor() {
@@ -82,8 +86,8 @@ class ToDo {
             <li data-js-todo-item="${id}">
                 <div class="task__window"> 
                     <div class="task__window__text" ">
-                        <h3>${title}</h3>
-                        <p>${about}</p>
+                        <h3>${this.escapeHtml(title)}</h3>
+                        <p>${this.escapeHtml(about)}</p>
                     </div>
                     <button class="task__window__button__dell" data-task-id=${id} data-js-todo-item-delete-button>
                         <img src="./assets/cross.svg" />
@@ -104,12 +108,18 @@ class ToDo {
         `).join('')
 
         const isEmptyItems = this.state.items.length === 0
-
-        this.noTasksMessageElement.innerHTML = isEmptyItems ? `
-            <div></div>
-            <p>Нет задач</p>
-            <div></div>
-        ` : '';
+        if (isEmptyItems) { 
+            this.noTasksMessageElement.innerHTML = `
+            <section class="no__task__window" data-js-no-tasks-message>
+                <div></div>
+                <p>Нет задач</p>
+                <div></div>
+            </section>
+            `;
+            this.noTasksMessageElement.style.display = 'block';
+        } else {
+            this.noTasksMessageElement.style.display = 'none'
+        }
 
     }
 
@@ -130,6 +140,7 @@ class ToDo {
     }
 
     showConfirmation(taskId) {
+
         const dialogHTML = `
             <div class="dialog__overlay" data-js-todo-delete-dialog>
                 <section class="dialog__window">
